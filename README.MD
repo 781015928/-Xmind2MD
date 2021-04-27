@@ -8,11 +8,21 @@
 
 ### 2.配置xmind工具环境变量
 
+## 编译
 
+### windows:
+```bash
+cd Xmind2MD
+gradlew.bat pack
+build/libs/Xmind2MD-1.0.0.zip
+```
 
-
-
-
+### linux:
+```bash
+cd Xmind2MD
+./gradlew pack
+build/libs/Xmind2MD-1.0.0.zip
+```
 
 ## 用法 -h
 
