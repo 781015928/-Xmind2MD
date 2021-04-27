@@ -21,9 +21,14 @@ public abstract class XMindNode {
         this.childNotHaveIndex = childNotHaveIndex;
     }
 
+    public boolean isChildNotHaveIndex() {
+        return this.childNotHaveIndex;
+    }
+
     public void setSkipIndex(boolean skipIndex) {
         this.skipIndex = skipIndex;
     }
+
     public boolean isSkipIndex() {
         return skipIndex;
     }
@@ -71,6 +76,7 @@ public abstract class XMindNode {
     public void addNode(XMindNode node) {
         if (childNotHaveIndex) {
             node.setSkipIndex(true);
+            node.setChildNotHaveIndex(childNotHaveIndex);
         }
         this.nodes.add(node);
     }

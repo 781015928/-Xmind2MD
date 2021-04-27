@@ -58,6 +58,10 @@ public class XMindReaderImpl extends AbstractComponent {
             node.setParent(parentNode);
             node.setRoot(root);
             node.setLevel(parentNode.getLevel() + 1);
+            if (parentNode.isChildNotHaveIndex()) {
+                node.setSkipIndex(parentNode.isChildNotHaveIndex());
+                node.setChildNotHaveIndex(parentNode.isChildNotHaveIndex());
+            }
             if (node.isSkipIndex()) {
                 node.setIndex(-1);
             } else {
