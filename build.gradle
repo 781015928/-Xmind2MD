@@ -18,17 +18,51 @@ dependencies {
 }
 task copyJar(type: Copy) {
     from configurations.runtime
-    into('build/libs')
+    into("build/$project.name/libs")
+
 }
 
+
+
+task copyBash(type: Copy) {
+    from("bin")
+    into("build/$project.name/bin")
+}
+
+task copyDoc(type: Copy) {
+    from("README.MD")
+    into("build/$project.name/")
+}
+copyJar.dependsOn(copyBash)
+
+copyBash.dependsOn(copyDoc)
+
 jar {
+
+    String classPath = ''
+    configurations.runtime.each { classPath = classPath + " libs//" + it.name }
     manifestContentCharset 'utf-8'
     metadataCharset 'utf-8'
     manifest {
         // manifest 文件声明主程序入口
         attributes "Main-Class": "com.czg.xmind.Main"
+        attributes 'Class-Path': classPath
     }
 
 
 }.dependsOn(copyJar)
 
+
+task mainJar(type: Copy) {
+    from("build/libs/${project.name}-${version}.jar")
+    into("build/$project.name/libs")
+}
+mainJar.dependsOn(jar)
+
+task pack(type: Zip) {
+    from "build/${project.name}"
+    destinationDir file('build/libs')
+}
+
+pack.group = 'build'
+pack.dependsOn(mainJar)
