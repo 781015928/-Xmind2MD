@@ -30,6 +30,9 @@ public class NodeFactoryImpl extends AbstractComponent implements NodeFactory {
             node.setContent(titleText);
         } else if (isImage(topic)) {
             node = parseImageNode(topic);
+        } else if (DomUtil.isTable(topic)) {
+            node = new XMindCodeNode();
+            node.setContent(titleText);
         } else {
             node = new XMindTextNode();
             if (titleText != null && titleText.startsWith("@")) {

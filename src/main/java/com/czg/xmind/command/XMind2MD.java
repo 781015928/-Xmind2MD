@@ -25,7 +25,7 @@ public class XMind2MD implements Tool {
         File outputFile = outputPath != null ? new File(outputPath) : null;
         if (!StringUtil.isNotEmpty(outputPath)) {
             String name = inputFile.getName().substring(0, inputFile.getName().indexOf('.'));
-            outputPath = inputPath.replaceAll(".xmind", ".MD");
+            outputPath = inputPath.replaceAll(".xmind", ".md");
             outputFile = new File(outputPath);
             String assetPath = name;
             FileUtil.clearDir(new File(outputFile.getParentFile(), assetPath));

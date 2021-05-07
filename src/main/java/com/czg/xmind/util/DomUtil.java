@@ -19,9 +19,11 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Objects;
 
 
 public class DomUtil {
+    private static final String table = "org.xmind.ui.spreadsheet.column";
 
     public static InputStream getImage(ITopic topic) {
         String source = topic.getImage().getSource().replace("xap:", "");
@@ -30,6 +32,24 @@ public class DomUtil {
         return manifest.getFileEntry(source).getInputStream();
     }
 
+    /**
+     * 列竖向返回
+     * 行横向返回
+     *
+     * @param topic
+     * @return
+     */
+    public static boolean isTable(ITopic topic) {
+        if (topic == null) return false;
+        if (!(topic instanceof TopicImpl)) return false;
+        if (((TopicImpl) topic).getImplementation() == null) return false;
+        if (((TopicImpl) topic).getImplementation().getAttributes() == null) return false;
+        if (((TopicImpl) topic).getImplementation().getAttributes().getNamedItem("structure-class") == null)
+            return false;
+        if (((TopicImpl) topic).getImplementation().getAttributes().getNamedItem("structure-class").getNodeValue() == null)
+            return false;
+        return ((TopicImpl) topic).getImplementation().getAttributes().getNamedItem("structure-class").getNodeValue().startsWith("org.xmind.ui.spreadsheet");
+    }
 
     public static String getImageMediaType(ITopic topic) {
         String source = topic.getImage().getSource().replace("xap:", "");

@@ -27,9 +27,6 @@ public abstract class Command {
 
     protected Options options = new Options();
 
-    /**
-     *
-     */
 
     protected Options getOptions() {
         return options;
@@ -38,9 +35,7 @@ public abstract class Command {
     private String useAge;
 
     /**
-     * get string of help usage
-     *
-     * @return help string
+     * @return help
      */
     protected String getUsage() {
         if (useAge == null) {
@@ -59,10 +54,6 @@ public abstract class Command {
     }
 
 
-    /**
-     * Parse and run the given command line. This may exit the JVM if
-     * a nonzero exit code is returned from <code>run()</code>.
-     */
     public void doMain(String args[], Context context) {
         try {
             /********
